@@ -17,23 +17,28 @@ LDFLAGS =
 BUILD_DIR = build
 GRAPH_DIR = graph
 TREE_DIR = tree
+PATH_DIR = path
 COMMON_DIR = common
 
 SOURCES_GRAPH = main.cpp graph.cpp
 SOURCES_TREE = tree.cpp
 SOURCES_COMMON = circular_buffer.cpp logger.cpp
+SOURCES_PATH = path.cpp
+
 
 SRC_GRAPH = $(addprefix $(GRAPH_DIR)/, $(SOURCES_GRAPH))
 SRC_TREE = $(addprefix $(TREE_DIR)/, $(SOURCES_TREE))
 SRC_COMMON = $(addprefix $(COMMON_DIR)/, $(SOURCES_COMMON))
-SOURCES = $(SRC_GRAPH) $(SRC_TREE) $(SRC_COMMON)
+SRC_PATH = $(addprefix $(PATH_DIR)/, $(SOURCES_PATH))
+
+SOURCES = $(SRC_GRAPH) $(SRC_TREE) $(SRC_COMMON) $(SRC_PATH)
 
 OBJECTS = $(addprefix $(BUILD_DIR)/, $(SOURCES:%.cpp=%.o))
 DEPS_STACK = $(OBJECTS:%.o=%.d)
 
 EXECUTABLE = build/meow
 
-CFLAGS += -I$(GRAPH_DIR) -I$(TREE_DIR) -I$(COMMON_DIR)
+CFLAGS += -I$(GRAPH_DIR) -I$(TREE_DIR) -I$(COMMON_DIR) -I$(PATH_DIR)
 
 .PHONY: all clean
 
